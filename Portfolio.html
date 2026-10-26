@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --background: #0d1024;
+            --background-light: #171a35;
+            --card: rgba(255, 255, 255, 0.06);
+            --pink: #f3a6c8;
+            --lavender: #c4b5fd;
+            --white: #f8f5ff;
+            --muted: #aaa9c5;
+            --border: rgba(255, 255, 255, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--background);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: rgba(196, 181, 253, 0.12);
+            filter: blur(120px);
+            top: -100px;
+            left: -100px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: rgba(243, 166, 200, 0.10);
+            filter: blur(120px);
+            bottom: -100px;
+            right: -100px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(13, 16, 36, 0.8);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--pink);
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 10%;
+            gap: 50px;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .tag {
+            display: inline-block;
+            border: 1px solid rgba(243, 166, 200, 0.4);
+            color: var(--pink);
+            padding: 9px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 6vw, 75px);
+            line-height: 1.15;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            color: var(--muted);
+            line-height: 1.9;
+            max-width: 470px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 25px;
+            background: linear-gradient(135deg, var(--pink), var(--lavender));
+            color: #17132b;
+            font-weight: 700;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(243, 166, 200, 0.2);
+        }
+
+        .hero-image {
+            width: 310px;
+            height: 400px;
+            border-radius: 160px 160px 25px 25px;
+            border: 1px solid rgba(243, 166, 200, 0.4);
+            background:
+                linear-gradient(180deg, rgba(13,16,36,0.05), rgba(13,16,36,0.7)),
+                url("https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80");
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 70px rgba(196, 181, 253, 0.12);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .image-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            padding: 12px;
+            background: rgba(13, 16, 36, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            color: var(--pink);
+            font-family: 'Playfair Display', serif;
+        }
+
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-heading small {
+            color: var(--pink);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 45px);
+            margin-top: 15px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            margin-top: 15px;
+        }
+
+        .about-card {
+            max-width: 850px;
+            margin: auto;
+            padding: 40px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            text-align: center;
+        }
+
+        .about-card p {
+            color: var(--muted);
+            line-height: 2;
+            font-size: 15px;
+        }
+
+        .about-card .quote {
+            color: var(--pink);
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .interest {
+            background: rgba(196, 181, 253, 0.12);
+            border: 1px solid rgba(196, 181, 253, 0.2);
+            color: var(--lavender);
+            padding: 10px 17px;
+            border-radius: 25px;
+            font-size: 13px;
+        }
+
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .music-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .music-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(243, 166, 200, 0.5);
+        }
+
+        .music-cover {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 15px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .music-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 7px;
+        }
+
+        .music-card p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .music-link {
+            display: inline-block;
+            color: var(--pink);
+            font-size: 13px;
+            border-bottom: 1px solid var(--pink);
+            padding-bottom: 4px;
+        }
+
+        .manhwa-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .manhwa-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .manhwa-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(196, 181, 253, 0.5);
+        }
+
+        .manhwa-cover {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .manhwa-info {
+            padding: 22px;
+        }
+
+        .genre {
+            color: var(--pink);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .manhwa-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            margin: 10px 0;
+        }
+
+        .manhwa-info p {
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 13px;
+        }
+
+        .contact-card {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+            padding: 50px 30px;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            background: var(--card);
+        }
+
+        .contact-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .contact-card p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Contact links */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 12px 22px;
+            border: 1px solid rgba(243, 166, 200, 0.4);
+            border-radius: 30px;
+            color: var(--pink);
+            background: rgba(243, 166, 200, 0.06);
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .contact-link:hover {
+            background: linear-gradient(135deg, var(--pink), var(--lavender));
+            color: #17132b;
+            transform: translateY(-4px);
+        }
+
+        .contact-note {
+            margin-top: 25px;
+            margin-bottom: 0 !important;
+            font-size: 13px;
+            color: var(--pink) !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        footer span {
+            color: var(--pink);
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 65px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image {
+                width: 260px;
+                height: 330px;
+            }
+
+            .music-grid,
+            .manhwa-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 20px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            section {
+                padding: 75px 6%;
+            }
+
+            .hero {
+                padding: 65px 6%;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .music-grid,
+            .manhwa-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .manhwa-cover {
+                height: 400px;
+            }
+
+            .about-card {
+                padding: 28px 20px;
+            }
+
+            .contact-card h2 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#home" class="logo">My Little Universe ♡</a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#manhwa">Manhwa</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="hero-text">
+            <span class="tag">✦ WELCOME TO MY WORLD ✦</span>
+
+            <h1>
+                Hi, I'm <span>Jemy Rose Bravo</span>.<br>
+                Welcome to my<br>
+                little universe.
+            </h1>
+
+            <p>
+                A little space where I share my favorite music,
+                the stories I love, and little things that make
+                me happy. Get to know me through the things I adore.
+            </p>
+
+            <a href="#about" class="button">Discover More ♡</a>
+        </div>
+
+        <div class="hero-image">
+            <div class="image-label">
+                a little dreamy, a little me
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="section-heading">
+            <small>Get to know me</small>
+            <h2>About Me</h2>
+            <p>A few little things about who I am.</p>
+        </div>
+
+        <div class="about-card">
+            <div class="quote">
+                "I find happiness in the little things."
+            </div>
+
+            <p>
+                Hello! My name is <strong>Jemy Rose Bravo</strong>.
+                I'm someone who enjoys music, reading manhwa,
+                and spending time in my own little world.
+                I love discovering stories that make me feel
+                something and songs that understand my mood.
+                <br><br>
+                This portfolio is a small collection of my
+                interests, favorites, and the things that
+                make me who I am.
+            </p>
+
+            <div class="interests">
+                <span class="interest">♡ Music</span>
+                <span class="interest">♡ Manhwa</span>
+                <span class="interest">♡ Reading</span>
+                <span class="interest">♡ Daydreaming</span>
+                <span class="interest">♡ Cozy Moments</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="music">
+        <div class="section-heading">
+            <small>My personal soundtrack</small>
+            <h2>Favorite Music</h2>
+            <p>Songs that feel like little pieces of me.</p>
+        </div>
+
+        <div class="music-grid">
+            <div class="music-card">
+                <img
+                    class="music-cover"
+                    src="file:///storage/emulated/0/Download/brooklyn_baby.jpg"
+                    alt="Brooklyn Baby cover">
+
+                <h3>Brooklyn Baby</h3>
+                <p>Lana Del Rey</p>
+
+                <a
+                    class="music-link"
+                    href="https://open.spotify.com/track/0oaY0KqqYwLhkloOs4vZmh"
+                    target="_blank"
+                    rel="noopener">
+                    Listen on Spotify ↗
+                </a>
+            </div>
+
+            <div class="music-card">
+                <img
+                    class="music-cover"
+                    src="file:///storage/emulated/0/Download/the_cure.jpg"
+                    alt="The Cure cover">
+
+                <h3>The Cure</h3>
+                <p>Olivia Rodrigo</p>
+
+                <a
+                    class="music-link"
+                    href="https://open.spotify.com/album/5ENdEvuJaDKT1frMkkR1vi"
+                    target="_blank"
+                    rel="noopener">
+                    Listen on Spotify ↗
+                </a>
+            </div>
+
+            <div class="music-card">
+                <img
+                    class="music-cover"
+                    src="file:///storage/emulated/0/Download/heavy.jpg"
+                    alt="Heavy cover">
+
+                <h3>Heavy</h3>
+                <p>The Marías</p>
+
+                <a
+                    class="music-link"
+                    href="https://open.spotify.com/track/1ShRHPAiiIrh0arZbSFmx1"
+                    target="_blank"
+                    rel="noopener">
+                    Listen on Spotify ↗
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="manhwa">
+        <div class="section-heading">
+            <small>Stories I adore</small>
+            <h2>My Favorite Manhwa</h2>
+            <p>Beautiful stories, unforgettable characters, and worlds I love.</p>
+        </div>
+
+        <div class="manhwa-grid">
+            <div class="manhwa-card">
+                <img
+                    class="manhwa-cover"
+                    src="file:///storage/emulated/0/Download/eleceed.jpg"
+                    alt="Eleceed manhwa cover">
+
+                <div class="manhwa-info">
+                    <span class="genre">Action/Adventure/Fantasy/Webtoons/Shounen</span>
+
+                    <h3>Eleceed</h3>
+
+                    <p>
+                        My ultimate favorite and comfort manhwa.
+                        I love its lovable characters, funny moments,
+                        and the heartwarming bond between Jiwoo and Kayden.
+                        No matter how many times I read it, it always feels like coming home.
+                    </p>
+                </div>
+            </div>
+
+            <div class="manhwa-card">
+                <img
+                    class="manhwa-cover"
+                    src="file:///storage/emulated/0/Download/remarried_empress.jpg"
+                    alt="Remarried Empress manhwa cover">
+
+                <div class="manhwa-info">
+                    <span class="genre">Romance/Webtoon</span>
+
+                    <h3>Remarried Empress</h3>
+
+                    <p>
+                        A captivating story of royalty, love, betrayal,
+                        and second chances. I admire Navier's intelligence,
+                        elegance, and strength as she finds her own happiness
+                        and refuses to let others define her worth.
+                    </p>
+                </div>
+            </div>
+
+            <div class="manhwa-card">
+                <img
+                    class="manhwa-cover"
+                    src="file:///storage/emulated/0/Download/who_made_me_a_princess.jpg"
+                    alt="Who Made Me a Princess manhwa cover">
+
+                <div class="manhwa-info">
+                    <span class="genre">Webtoons/Shoujo/Fantasy/Historical/Drama</span>
+
+                    <h3>Who Made Me A Princess?</h3>
+
+                    <p>
+                        A beautiful story filled with magic, royal life,
+                        and complicated family bonds. I love its dreamy atmosphere
+                        and the emotional journey of Athanasia and her father.
+                        It's a story that makes me appreciate the little moments
+                        of love, warmth, and belonging.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPDATED CONTACT SECTION -->
+    <section id="contact">
+        <div class="section-heading">
+            <small>Let's stay connected</small>
+            <h2>Contact Me</h2>
+            <p>Feel free to find me through any of these platforms.</p>
+        </div>
+
+        <div class="contact-card">
+            <h2>Let's Connect ♡</h2>
+
+            <p>
+                Thank you for visiting my little universe!
+                If you'd like to reach me or say hello,
+                you can find me on these platforms.
+            </p>
+
+            <div class="contact-links">
+                
+<a
+    class="contact-link"
+    href="https://mail.google.com/mail/?view=cm&to=bravojemyrose@gmail.com"
+    target="_blank"
+    rel="noopener noreferrer">
+    ✉ Email Me
+</a>
+
+
+                <a
+                    class="contact-link"
+                    href="https://discord.com/users/ariayves"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    ♡ Discord
+                </a>
+
+                <a
+                    class="contact-link"
+                    href="https://instagram.com/sammicharia"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    ♡ Instagram
+                </a>
+            </div>
+
+            <p class="contact-note">
+                Thank you for stopping by. Have a lovely day! ♡
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        Made with <span>♡</span> by Jemy Rose Bravo
+        <br>
+        © 2026 My Little Universe
+    </footer>
+
+</body>
+</html>
